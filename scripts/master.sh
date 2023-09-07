@@ -66,6 +66,8 @@ kubectl apply -f /vagrant/dashboard-svc-account.yaml
 kubectl apply -f /vagrant/dashboard-clusterrolebinding.yaml
 kubectl -n kubernetes-dashboard patch svc kubernetes-dashboard --patch "$(cat /vagrant/dashboard-nodeport-patch.yaml)"
 
+# Add local storage class to the cluster
+kubectl apply -f /vagrant/local-storage-class.yaml
 
 # Create token and place in the shared folder 
 # Use token to login through the UI after creating an SSH remote port forwarding
