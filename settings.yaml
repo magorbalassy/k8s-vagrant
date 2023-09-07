@@ -17,5 +17,5 @@ nodes:
     memory: 65536
 software:
   box: generic/ubuntu2004
-  kubernetes: 1.24.0-00
+  kubernetes: 1.25.0-00
   os: xUbuntu_20.04
