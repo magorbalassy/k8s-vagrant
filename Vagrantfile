@@ -76,6 +76,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
               :type => "bridge",
               :dev => "bridge0",
               :ip => IP_NW + "#{IP_START + i}"
+          worker.vm.provider "libvirt" do |vb|
+              vb.cpus = settings["nodes"]["workers"]["cpu"]
+              vb.memory = settings["nodes"]["workers"]["memory"]
+          end
           worker.vm.provision :shell, inline: <<-SHELL
               sudo sed -i 's/ubuntu2004.localdomain/'"k8s-worker#{i}"'/g' /etc/hosts
           SHELL
@@ -90,5 +94,5 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           worker.vm.synced_folder "/nvme/k8s-nfs/k8s-worker#{i}", "/data", type: "nfs", create: true
       end
     end
-
+    
 end
