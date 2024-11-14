@@ -41,7 +41,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       control.vm.network :public_network,
           :network_name => "bridged-network",
           :type => "bridge",
-          :dev => "bridge0",
+          :dev => "br0",
           :ip => settings["network"]["control_ip"]
   
       control.vm.provider "libvirt" do |vb|
@@ -74,7 +74,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           worker.vm.network :public_network,
               :network_name => "bridged-network",
               :type => "bridge",
-              :dev => "bridge0",
+              :dev => "br0",
               :ip => IP_NW + "#{IP_START + i}"
           worker.vm.provider "libvirt" do |vb|
               vb.cpus = settings["nodes"]["workers"]["cpu"]
