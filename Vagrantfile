@@ -65,7 +65,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
             "SERVICE_CIDR" => settings["network"]["service_cidr"]
           },
           path: "scripts/master.sh"
-      control.vm.synced_folder "/nvme/k8s-nfs/k8s-control", "/data", type: "nfs", create: true
+      control.vm.synced_folder "/nvme2/k8s-nfs/k8s-control", "/data", type: "nfs", create: true
     end
 
     (1..NUM_WORKER_NODES).each do |i|
@@ -91,7 +91,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
               },
               path: "scripts/common.sh"
           worker.vm.provision "shell", path: "scripts/node.sh"
-          worker.vm.synced_folder "/nvme/k8s-nfs/k8s-worker#{i}", "/data", type: "nfs", create: true
+          worker.vm.synced_folder "/nvme2/k8s-nfs/k8s-worker#{i}", "/data", type: "nfs", create: true
       end
     end
     
